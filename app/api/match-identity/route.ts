@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ai } from "@/lib/gemini";
+import { getAI } from "@/lib/gemini";
 import { Type } from "@google/genai";
 
 export async function POST(req: NextRequest) {
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       },
     ];
 
-    const response = await ai.models.generateContent({
+    const response = await getAI().models.generateContent({
       model: "gemini-3.5-flash",
       contents: parts,
       config: {
