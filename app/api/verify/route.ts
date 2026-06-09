@@ -21,20 +21,20 @@ export async function POST(req: NextRequest) {
     };
 
     const promptText = `
-      You are an automated premium AI identity assurance and compliance agent specialized in travel document verification.
-      Perform a deep, exact verification of the uploaded identity photograph in compliance with official ICAO Doc 9303 standards (machine-readable passport specifications).
+      You are an automated premium AI identity assurance and compliance agent specialized in UAE Residency and Emirates ID photograph verification.
+      Perform a deep, exact verification of the uploaded identity photograph in compliance with official UAE ICP (Federal Authority for Identity, Citizenship, Customs and Port Security) and ICAO Doc 9303 standards.
 
       Check the following specifications meticulously:
-      1. Background: Plain, neutral, off-white or light gray, with absolutely no shadows, patterns, or objects.
-      2. Pose & Alignment: Head straight (no tilt/yaw/roll), centered perfectly, eyes level, direct gaze to camera. Head occupying 70-80% of vertical height.
-      3. Expression: Neutral expression, mouth closed, no smiling/frowning/open mouth.
-      4. Eyes & Glasses: Eyes open, fully visible, looking straight. No reflections on glasses, no thick frames covering pupils, no hair obstructing eyes.
-      5. Lighting & Shadows: Even lighting, no flash reflections, no dark shadows under chin, nose, or background.
-      6. Style & Quality: Perfect focus, crisp sharpness, natural skin colors, no pixelation or artifacts.
+      1. Background: MUST be plain white, with absolutely no shadows, patterns, or objects.
+      2. Dimensions & Head Size: Face perfectly centered, occupying 70-80% of vertical height. Head straight (no tilt/yaw/roll), direct gaze to camera. 
+      3. Expression: Neutral expression ONLY, mouth COMPLETELY closed, no smiling, teeth MUST NOT show.
+      4. Eyes & Glasses: Eyes open, looking straight. Glasses NOT generally allowed unless for medical purposes; MUST NOT produce glare, obscure eyes, or have tinted lenses.
+      5. Dress Code: Headwear allowed only for religious purposes and must not cover the eyes, eyebrows, or sides of the face.
+      6. Lighting & Quality: Clear, sharp, with no ink marks, creases, or shadows. Minimum 600 DPI quality equivalent. No digital edits or filters.
 
       Also estimated landmark percentages from top-left (0 to 100 on X and Y axes) so we can place compliance targeting boxes in our web interface. Provide realistic bounding boxes if a face is detected.
 
-      Explain any compliance issues constructively, just like a passport officer or security systems manager would.
+      Explain any compliance issues constructively, just like a UAE typing center manager would.
     `;
 
     const response = await getAI().models.generateContent({

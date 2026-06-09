@@ -114,30 +114,30 @@ interface AuditRecord {
 const SAMPLE_PHOTOS = [
   {
     id: "compliant",
-    name: "Compliant Passport Photo",
-    url: "https://picsum.photos/seed/icao_f_1/500/600",
-    description: "Standard gray uniform background, neutral expression, crisp focus, excellent facial ratios.",
+    name: "Perfect ICAO Standard (Emirates ID)",
+    url: "/icao_perfect.png",
+    description: "Standard gray uniform background, neutral expression, crisp focus. Perfect for UAE Residency processing.",
     type: "compliant"
   },
   {
     id: "smile",
-    name: "Incorrect Expression (Smiling)",
-    url: "https://picsum.photos/seed/icao_f_smile/500/600",
-    description: "Smiles are restricted under ICAO Doc 9303. Teeth show, altering cheek and chin curvature biometric index.",
+    name: "Imperfect Photo (Invalid Expression)",
+    url: "/icao_flawed.png",
+    description: "Smiles are restricted for official Emirates ID. Teeth show, altering biometric landmarks.",
     type: "smile_violation"
   },
   {
     id: "shadows",
-    name: "Bad Lighting (Neck Shadows)",
-    url: "https://picsum.photos/seed/icao_f_shadow/500/600",
-    description: "Asymmetrical overhead flash casting hot white glare on forehead and dark shadows under ears.",
+    name: "Imperfect Photo (Bad Lighting)",
+    url: "/icao_shadow.png",
+    description: "Dark shadows on face or background. Typing centers will reject this for UAE Residency.",
     type: "shadow_violation"
   },
   {
     id: "glasses",
-    name: "Reflective Spectacles",
-    url: "https://picsum.photos/seed/icao_f_glasses/500/600",
-    description: "Heavy dark eyeglass frames masking facial points and causing specular glints over iris area.",
+    name: "Imperfect Photo (Reflective Spectacles)",
+    url: "/icao_glasses.png",
+    description: "Heavy dark frames masking facial points and causing glare, prohibited by ICA standards.",
     type: "glasses_violation"
   }
 ];
@@ -289,7 +289,7 @@ export default function Home() {
         ctx.translate(canvas.width, 0);
         ctx.scale(-1, 1);
         ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-        const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.6); // Reduced for faster AI scan
         
         if (webcamPurpose === "icao") {
           setIcaoPhoto(dataUrl);
@@ -456,7 +456,7 @@ export default function Home() {
                   KYC Verified
                 </span>
               </div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 mt-0.5">ICAO Passport Photo Verification Suite</h1>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 mt-0.5">UAE Residency & Emirates ID Photo Check</h1>
             </div>
           </div>
 
@@ -512,6 +512,13 @@ export default function Home() {
       {/* Main Container */}
       <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         
+        <div className="mb-6 flex space-x-2 items-center bg-blue-50 border border-blue-100 rounded-xl p-4 shadow-sm text-sm text-blue-900 leading-relaxed max-w-4xl">
+          <Info className="w-5 h-5 shrink-0 text-blue-600" />
+          <p>
+            Specially designed for UAE Typing Centers, Photo Studios, and residents to instantly verify photo compliance for <b>Emirates ID and UAE Residency processing</b>. Ensure ICAO Doc 9303 constraints are met before submission.
+          </p>
+        </div>
+
         {/* WEBCAM DIALOG SCREEN OVERLAY */}
         <AnimatePresence>
           {webcamActive && (
@@ -1451,11 +1458,11 @@ export default function Home() {
             <div className="bg-gradient-to-r from-slate-900 to-slate-950 text-white rounded-3xl p-8 shadow-md border border-slate-800">
               <div className="max-w-3xl space-y-2">
                 <span className="text-[10px] bg-blue-500/10 text-slate-350 bg-slate-800/60 px-2.5 py-1 rounded uppercase tracking-widest font-bold border border-slate-700">
-                  Official Standard ISO/IEC 19794-5
+                  Official Standard UAE ICP & ICAO
                 </span>
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight">ICAO Document Photograph standards Reference Handbook</h2>
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight">Emirates ID & UAE Residency Photo Guidelines</h2>
                 <p className="text-xs sm:text-sm text-slate-300 leading-normal opacity-90 max-w-2xl">
-                  Unified photo checking regulations are strictly defined in ICAO Document 9303 Part 3. System compliance scans assure that travel passport portraits qualify for next-generation automated biometric e-Gates globally.
+                  The UAE&apos;s Federal Authority for Identity, Citizenship, Customs and Port Security (ICP) requires specific photo formats. System compliance scans assure that your portrait qualifies for processing without delays.
                 </p>
               </div>
             </div>
@@ -1467,12 +1474,12 @@ export default function Home() {
                 <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-100 font-bold text-sm">
                   01
                 </div>
-                <h3 className="font-bold text-sm text-slate-900 leading-snug">Geometry & Proportions</h3>
+                <h3 className="font-bold text-sm text-slate-900 leading-snug">Dimensions & Head Size</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  The portrait head must measure between 32mm and 36mm (approx. 70-80%) of the vertical height from chin tip to crown top. It must be perfectly centered laterally, with eyes parallel to the bottom margin edge.
+                  Photos must measure 35 × 45 mm (or 35 × 40 mm for select documents). The head must measure between 32 mm and 36 mm from chin to top of hair. The face must be perfectly centered and occupy 70% to 80% of the frame.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Target Centering Dev: &lt; 5% Tolerance
+                  Age Constraint: &lt; 6 months old
                 </div>
               </div>
 
@@ -1480,12 +1487,12 @@ export default function Home() {
                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 font-bold text-sm">
                   02
                 </div>
-                <h3 className="font-bold text-sm text-slate-900 leading-snug">Uniform Background Standards</h3>
+                <h3 className="font-bold text-sm text-slate-900 leading-snug">Pose & Expression</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  The backdrop must be off-white, very light gray, or light cyan. Absolutely zero deep shadow contours, textured walls, wallpaper, plants, or other people may be visible. High contrast to skin tone is mandatory.
+                  Expression must be neutral and natural. Do not smile, keep mouth completely closed. Head position must be straight-on, facing the camera directly. Eyes must be open, looking directly at the lens.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Variance Index: &lt; 8% Hue Deviation
+                  Teeth Visibility: STRICTLY PROHIBITED
                 </div>
               </div>
 
@@ -1493,12 +1500,12 @@ export default function Home() {
                 <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 font-bold text-sm">
                   03
                 </div>
-                <h3 className="font-bold text-sm text-slate-900 leading-snug">Neutral Expression Profiles</h3>
+                <h3 className="font-bold text-sm text-slate-900 leading-snug">Background Standards</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  The applicant must maintain a neutral gaze with mouth closed (not smiling or frowning), teeth fully covered by lips, and relaxed facial muscles. Squinting, frowning, or blinking face statuses trigger immediate failures.
+                  The background must be plain white. Uniform and balanced lighting is required without shadows on the face or background. Absolutely zero textured walls, wallpaper, plants, or other people may be visible.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Teeth Visibility: STRICTLY PROHIBITED
+                  Background Color: Plain White
                 </div>
               </div>
 
@@ -1508,10 +1515,10 @@ export default function Home() {
                 </div>
                 <h3 className="font-bold text-sm text-slate-900 leading-snug">Spectacles & Eyewear</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  Eyeglasses must have thin metal or plastic frames. Frames must not cross or obstruct the eyelid margin or cover the pupil. Dark sunglasses lenses or glass lens flash hotspots/specular reflection are active causes for rejection.
+                  Not generally allowed unless worn daily for medical purposes. If worn, they must not cause reflection, glare, or cover the eyes in any way.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Iris Reflection: No Flash Specular Glare
+                  Medical Exception Only
                 </div>
               </div>
 
@@ -1519,12 +1526,12 @@ export default function Home() {
                 <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100 font-bold text-sm">
                   05
                 </div>
-                <h3 className="font-bold text-sm text-slate-900 leading-snug">Illumination & White Balance</h3>
+                <h3 className="font-bold text-sm text-slate-900 leading-snug">Dress Code & Headwear</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  Light source must cast symmetrical, uniform illumination across both sides of the nose and cheeks. Under-eye shadow clusters, chin silhouettes, or heavy red-eye flash issues are entirely uncompliant.
+                  Headwear allowed only for religious purposes and must not cover the eyes, eyebrows, or sides of the face. Emirati Citizens should align attire with official national dress.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Luminance Variance: Symmetrical &nbsp;&lt;&nbsp; 15% Max Diff
+                  Face Margins: Fully Visible
                 </div>
               </div>
 
@@ -1532,12 +1539,12 @@ export default function Home() {
                 <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center border border-slate-200 font-bold text-sm">
                   06
                 </div>
-                <h3 className="font-bold text-sm text-slate-900 leading-snug">Resolution & Focus Quality</h3>
+                <h3 className="font-bold text-sm text-slate-900 leading-snug">File & Digital Specs</h3>
                 <p className="text-xs text-slate-500 leading-normal leading-relaxed">
-                  Images must be taken at high resolution, displaying sharp contours of eye boundaries and hair lines. No motion blur, camera lens oil smudge, jpeg blocking artifacts, or printed paper re-scans are allowed.
+                  File Size: Between 1 MB and 5 MB (or &lt; 2 MB for bank KYC/smart channels). Format: PDF, JPG, JPEG, or PNG. Resolution: Minimum 600 DPI. No ink marks, creases, or digital alterations.
                 </p>
                 <div className="bg-slate-50 px-3 py-2 rounded-lg text-[10px] border border-slate-200 font-mono text-slate-600">
-                  Target Resolution: Min 300 DPI index
+                  Allowed Formats: PDF, JPG, PNG
                 </div>
               </div>
 
@@ -1546,9 +1553,9 @@ export default function Home() {
             {/* Official PDF source citation alert */}
             <div className="bg-slate-100 border border-slate-300 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
-                <h4 className="font-bold text-slate-900 text-xs">Looking for the official UAE ICA and ICAO specification sheets?</h4>
+                <h4 className="font-bold text-slate-900 text-xs">Looking for the official UAE ICP specification sheets?</h4>
                 <p className="text-[11px] text-slate-500 leading-normal">
-                  You can inspect the complete regulatory details referenced in our analysis parameters via standard ICA documentation templates.
+                  You can inspect the complete regulatory details referenced in our analysis parameters via standard ICP documentation templates.
                 </p>
               </div>
               <a
@@ -1691,11 +1698,11 @@ export default function Home() {
       {/* Footer Info bar */}
       <footer id="app-footer" className="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="leading-normal">
-            ICAO Passport Photo &amp; Biometric KYC Compliance Engine.
+          <p className="leading-normal font-medium text-slate-500">
+            Built With <span className="text-red-500 text-sm">❤️</span> in UAE by <a href="https://ainulislam.info" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-blue-600 underline decoration-slate-300">Ainulislam.info</a>
           </p>
           <div className="flex space-x-4">
-            <span className="text-[10px]">ISO/IEC 19794-5 Standard compliance specifications</span>
+            <span className="text-[10px]">ICAO Doc 9303 & ISO/IEC 19794-5 specifications for Emirates ID.</span>
           </div>
         </div>
       </footer>
