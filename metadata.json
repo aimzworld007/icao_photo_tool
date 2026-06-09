@@ -1,0 +1,10 @@
+{
+  "name": "ICAO Photo Verification & KYC Suite",
+  "description": "Professional ICAO Doc 9303 photograph compliance analysis and facial biometric recognition and identity verification platform.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
