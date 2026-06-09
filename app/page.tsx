@@ -186,44 +186,46 @@ export default function Home() {
   const [webcamPurpose, setWebcamPurpose] = useState<"icao" | "kyc-selfie" | null>(null);
 
   // Log Storage State
-  const [auditLogs, setAuditLogs] = useState<AuditRecord[]>(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("icao_kyc_audit_logs");
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error("Failed to parse logs", e);
-        }
+  const [auditLogs, setAuditLogs] = useState<AuditRecord[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("icao_kyc_audit_logs");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setAuditLogs(parsed);
+        return;
+      } catch (e) {
+        console.error("Failed to parse logs", e);
       }
-      
-      // Seed prefilled compliance log if storage empty
-      const defaultLogs: AuditRecord[] = [
-        {
-          id: "TX-2026-0912A",
-          timestamp: new Date(Date.now() - 3600000 * 2.5).toLocaleString(),
-          type: "compliance_scan",
-          photoUrl: "https://picsum.photos/seed/icao_f_1/500/600",
-          score: 95,
-          status: "PASSED",
-          details: "Compliance test completed under normal background: Gray uniform. Neutral expression."
-        },
-        {
-          id: "TX-2026-0912B",
-          timestamp: new Date(Date.now() - 3600000 * 18).toLocaleString(),
-          type: "identity_match",
-          photoUrl: "https://picsum.photos/seed/client_s1/500/600",
-          secondaryPhotoUrl: "https://picsum.photos/seed/client_s1/480/580",
-          score: 94,
-          status: "VERIFIED",
-          details: "Biometric matching passed with high similarity and reliable liveness triggers."
-        }
-      ];
-      localStorage.setItem("icao_kyc_audit_logs", JSON.stringify(defaultLogs));
-      return defaultLogs;
     }
-    return [];
-  });
+    
+    // Seed prefilled compliance log if storage empty
+    const defaultLogs: AuditRecord[] = [
+      {
+        id: "TX-2026-0912A",
+        timestamp: new Date(Date.now() - 3600000 * 2.5).toLocaleString(),
+        type: "compliance_scan",
+        photoUrl: "https://picsum.photos/seed/icao_f_1/500/600",
+        score: 95,
+        status: "PASSED",
+        details: "Compliance test completed under normal background: Gray uniform. Neutral expression."
+      },
+      {
+        id: "TX-2026-0912B",
+        timestamp: new Date(Date.now() - 3600000 * 18).toLocaleString(),
+        type: "identity_match",
+        photoUrl: "https://picsum.photos/seed/client_s1/500/600",
+        secondaryPhotoUrl: "https://picsum.photos/seed/client_s1/480/580",
+        score: 94,
+        status: "VERIFIED",
+        details: "Biometric matching passed with high similarity and reliable liveness triggers."
+      }
+    ];
+    localStorage.setItem("icao_kyc_audit_logs", JSON.stringify(defaultLogs));
+    setAuditLogs(defaultLogs);
+  }, []);
 
   // Category view trigger
   const [expandedSection, setExpandedSection] = useState<string>("poseAndAlignment");
