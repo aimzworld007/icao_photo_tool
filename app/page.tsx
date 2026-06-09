@@ -460,57 +460,59 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Navigation Controls */}
-          <nav className="flex items-center bg-slate-100 p-1 rounded-xl self-start md:self-auto border border-slate-200">
-            <button
-              onClick={() => setActiveTab("icao")}
-              className={cn(
-                "px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5",
-                activeTab === "icao" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              )}
-            >
-              <Camera className="w-3.5 h-3.5" />
-              <span>Compliance Scan</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("kyc")}
-              className={cn(
-                "px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5",
-                activeTab === "kyc" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              )}
-            >
-              <User className="w-3.5 h-3.5" />
-              <span>Biometric Identity Match</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("explorer")}
-              className={cn(
-                "px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5",
-                activeTab === "explorer" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              )}
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Standards Reference</span>
-            </button>
-            <button
-              onClick={() => setActiveTab("audit")}
-              className={cn(
-                "px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5",
-                activeTab === "audit" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
-              )}
-            >
-              <History className="w-3.5 h-3.5" />
-              <span>Audit Ledger</span>
-              <span className="bg-slate-200 text-slate-700 text-[10px] w-4.5 h-4.5 flex items-center justify-center rounded-full font-bold">
-                {auditLogs.length}
-              </span>
-            </button>
-          </nav>
+          {/* Navigation Controls (Desktop) */}
+          <div className="hidden md:flex w-full md:w-auto overflow-x-auto no-scrollbar mask-fade-right md:mask-none pb-2 md:pb-0 -mb-2 md:mb-0">
+            <nav className="flex items-center w-max bg-slate-100 p-1 rounded-xl border border-slate-200">
+              <button
+                onClick={() => setActiveTab("icao")}
+                className={cn(
+                  "px-3.5 py-1.5 whitespace-nowrap rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5 shrink-0",
+                  activeTab === "icao" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
+                )}
+              >
+                <Camera className="w-3.5 h-3.5" />
+                <span>Compliance Scan</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("kyc")}
+                className={cn(
+                  "px-3.5 py-1.5 whitespace-nowrap rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5 shrink-0",
+                  activeTab === "kyc" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
+                )}
+              >
+                <User className="w-3.5 h-3.5" />
+                <span>Biometric Identity Match</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("explorer")}
+                className={cn(
+                  "px-3.5 py-1.5 whitespace-nowrap rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5 shrink-0",
+                  activeTab === "explorer" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
+                )}
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Standards Reference</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("audit")}
+                className={cn(
+                  "px-3.5 py-1.5 whitespace-nowrap rounded-lg text-xs font-semibold tracking-tight transition-all duration-150 flex items-center space-x-1.5 shrink-0",
+                  activeTab === "audit" ? "bg-white text-blue-600 shadow-xs border border-slate-200" : "text-slate-500 hover:text-slate-900"
+                )}
+              >
+                <History className="w-3.5 h-3.5" />
+                <span>Audit Ledger</span>
+                <span className="bg-slate-200 text-slate-700 text-[10px] w-4.5 h-4.5 flex items-center justify-center rounded-full font-bold">
+                  {auditLogs.length}
+                </span>
+              </button>
+            </nav>
+          </div>
         </div>
       </header>
 
       {/* Main Container */}
-      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 pb-24 md:pb-8">
         
         <div className="mb-6 flex space-x-2 items-center bg-blue-50 border border-blue-100 rounded-xl p-4 shadow-sm text-sm text-blue-900 leading-relaxed max-w-4xl">
           <Info className="w-5 h-5 shrink-0 text-blue-600" />
@@ -837,6 +839,14 @@ export default function Home() {
                     <p className="text-xs text-slate-500 max-w-xs leading-normal animate-pulse">
                       Analyzing pixel density, calculating background hue variances, checking facial geometric rotation and vertical guidelines...
                     </p>
+                    <div className="w-full max-w-xs mt-6 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                      <motion.div 
+                        className="bg-blue-600 h-full"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "90%" }}
+                        transition={{ duration: 15, ease: "easeOut" }}
+                      />
+                    </div>
                   </motion.div>
                 )}
 
@@ -1290,6 +1300,14 @@ export default function Home() {
                     <p className="text-xs text-slate-500 max-w-xs leading-normal animate-pulse">
                       Analyzing orbital alignment, relative jaw taper, nasal bridge structures and cross-referencing against passport security printing...
                     </p>
+                    <div className="w-full max-w-xs mt-6 bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                      <motion.div 
+                        className="bg-emerald-600 h-full"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "90%" }}
+                        transition={{ duration: 15, ease: "easeOut" }}
+                      />
+                    </div>
                   </motion.div>
                 )}
 
@@ -1696,7 +1714,7 @@ export default function Home() {
       </main>
 
       {/* Footer Info bar */}
-      <footer id="app-footer" className="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-400">
+      <footer id="app-footer" className="border-t border-slate-200 bg-white py-6 mt-12 mb-16 md:mb-0 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="leading-normal font-medium text-slate-500">
             Built With <span className="text-red-500 text-sm">❤️</span> in UAE by <a href="https://ainulislam.info" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-700 hover:text-blue-600 underline decoration-slate-300">Ainulislam.info</a>
@@ -1706,6 +1724,53 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex items-center justify-around z-50 px-2 py-2 pb-safe shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+        <button
+          onClick={() => setActiveTab("icao")}
+          className={cn(
+            "flex flex-col items-center justify-center p-2 transition-all w-1/4",
+            activeTab === "icao" ? "text-blue-600 font-bold" : "text-slate-500 hover:text-slate-900 font-medium"
+          )}
+        >
+          <Camera className={cn("w-5 h-5 mb-1 transition-colors", activeTab === "icao" ? "text-blue-600" : "text-slate-400")} />
+          <span className="text-[10px] tracking-tight">Scan</span>
+        </button>
+        <button
+          onClick={() => setActiveTab("kyc")}
+          className={cn(
+            "flex flex-col items-center justify-center p-2 transition-all w-1/4",
+            activeTab === "kyc" ? "text-blue-600 font-bold" : "text-slate-500 hover:text-slate-900 font-medium"
+          )}
+        >
+          <User className={cn("w-5 h-5 mb-1 transition-colors", activeTab === "kyc" ? "text-blue-600" : "text-slate-400")} />
+          <span className="text-[10px] tracking-tight">Identity</span>
+        </button>
+        <button
+          onClick={() => setActiveTab("explorer")}
+          className={cn(
+            "flex flex-col items-center justify-center p-2 transition-all w-1/4",
+            activeTab === "explorer" ? "text-blue-600 font-bold" : "text-slate-500 hover:text-slate-900 font-medium"
+          )}
+        >
+          <BookOpen className={cn("w-5 h-5 mb-1 transition-colors", activeTab === "explorer" ? "text-blue-600" : "text-slate-400")} />
+          <span className="text-[10px] tracking-tight">Rules</span>
+        </button>
+        <button
+          onClick={() => setActiveTab("audit")}
+          className={cn(
+            "flex flex-col items-center justify-center p-2 transition-all w-1/4 relative",
+            activeTab === "audit" ? "text-blue-600 font-bold" : "text-slate-500 hover:text-slate-900 font-medium"
+          )}
+        >
+          <History className={cn("w-5 h-5 mb-1 transition-colors", activeTab === "audit" ? "text-blue-600" : "text-slate-400")} />
+          <span className="text-[10px] tracking-tight">Audit</span>
+          <span className="absolute top-1 right-2 bg-slate-200 text-slate-700 text-[8px] w-3.5 h-3.5 flex items-center justify-center rounded-full font-bold shadow-xs">
+            {auditLogs.length}
+          </span>
+        </button>
+      </nav>
     </div>
   );
 }

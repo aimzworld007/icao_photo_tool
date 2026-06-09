@@ -2,8 +2,10 @@ import type {Metadata} from 'next';
 import './globals.css'; // Global styles
 
 export const metadata: Metadata = {
-  title: 'ICAO Photo Verification & KYC Suite',
+  title: 'UAE Identity Photo Check',
   description: 'Professional ICAO Doc 9303 photograph compliance analysis and facial biometric recognition and identity verification platform.',
+  manifest: '/manifest.json',
+  themeColor: '#0ea5e9',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
