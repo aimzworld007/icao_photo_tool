@@ -35,6 +35,7 @@ import {
   Download
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { KycComparisonSplitView } from "@/components/KycComparisonSplitView";
 
 // Define strict types for the ICAO compliance check
 interface CategoryCheck {
@@ -1251,7 +1252,7 @@ export default function Home() {
               <AnimatePresence mode="wait">
                 
                 {/* State A: Incomplete state screen */}
-                {!kycReport && !analyzingKyc && !kycError && (
+                {!kycReport && !analyzingKyc && !kycError && (!kycSelfie || !kycDoc) && (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -1279,6 +1280,24 @@ export default function Home() {
                         <span>Screens for print-attack spoofing metrics</span>
                       </div>
                     </div>
+                  </motion.div>
+                )}
+
+                {/* State A.2: Interactive pre-match manual inspection (Both files loaded, before verify is clicked) */}
+                {!kycReport && !analyzingKyc && !kycError && kycSelfie && kycDoc && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="space-y-6"
+                  >
+                    <div className="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex items-center space-x-3 text-xs text-amber-800 shadow-3xs">
+                      <Info className="w-4 h-4 text-amber-600 shrink-0 animate-bounce" />
+                      <p className="font-semibold">
+                        Ready for verification! Click the green <b>&quot;Compute Match Verdict&quot;</b> button on the left to output comprehensive biometric analytics.
+                      </p>
+                    </div>
+                    <KycComparisonSplitView selfieUrl={kycSelfie} docUrl={kycDoc} />
                   </motion.div>
                 )}
 
@@ -1376,6 +1395,9 @@ export default function Home() {
 
                       </div>
                     </div>
+
+                    {/* Forensic Photo Overlap & Split-view Analyzer */}
+                    <KycComparisonSplitView selfieUrl={kycSelfie!} docUrl={kycDoc!} />
 
                     {/* Liveness anti-spoofing audit report card */}
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
