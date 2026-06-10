@@ -1,4 +1,5 @@
 {
+  "id": "uae-identity-photo-compliance-check-pwa",
   "name": "UAE Identity Photo Check",
   "short_name": "UAE ID Check",
   "description": "Emirates ID & Residency Photo Verification Suite",
@@ -6,16 +7,35 @@
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0ea5e9",
+  "orientation": "any",
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/splash.png",
+      "sizes": "768x1376",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Emirates ID and Residency photo validation suite interface"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1424x752",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "ICAO compliance checking and facial biometrics analysis system tool"
     }
   ]
 }
