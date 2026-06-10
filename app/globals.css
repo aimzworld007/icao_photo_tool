@@ -1,1 +1,144 @@
 @import "tailwindcss";
+
+/* ---------------------------------
+   GLOBAL DARK MODE SYSTEM OVERRIDES
+   --------------------------------- */
+
+.dark {
+  color-scheme: dark;
+}
+
+/* Base Body and Root overrides */
+.dark #compliance-main-root,
+.dark .bg-slate-50,
+.dark .bg-slate-100 {
+  background-color: #0b0f19 !important; /* ultra dark navy slate-950 */
+  color: #f1f5f9 !important; /* slate-100 */
+}
+
+/* Card and Container overrides */
+.dark .bg-white,
+.dark #kyc-comparison-station-root {
+  background-color: #111827 !important; /* deep slate-900 */
+  color: #f8fafc !important; /* slate-50 */
+  border-color: #1f2937 !important; /* slate-800 */
+}
+
+/* Banner override */
+.dark .bg-blue-50 {
+  background-color: rgba(30, 41, 59, 0.45) !important; /* slate-800 accent */
+  border-color: rgba(59, 130, 246, 0.25) !important; 
+  color: #bfdbfe !important; /* blue-200 */
+}
+
+.dark .bg-amber-50 {
+  background-color: rgba(45, 30, 10, 0.5) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  color: #fde68a !important; /* amber-200 */
+}
+
+.dark .bg-emerald-50,
+.dark .bg-emerald-50\/20 {
+  background-color: rgba(6, 78, 59, 0.3) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: #a7f3d0 !important; /* emerald-200 */
+}
+
+.dark .bg-red-50 {
+  background-color: rgba(127, 29, 29, 0.3) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+  color: #fecaca !important; /* red-200 */
+}
+
+/* Border overrides */
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-300,
+.dark .border,
+.dark .border-slate-250 {
+  border-color: #1f2937 !important; /* slate-800 */
+}
+
+/* Hover classes overrides */
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-slate-100:hover {
+  background-color: #1f2937 !important; /* slate-800 */
+}
+
+/* Header & Footer & Nav fixed bars */
+.dark #app-header,
+.dark #app-footer,
+.dark .md\:hidden.fixed.bottom-0 {
+  background-color: #0f172a !important; /* slate-900 */
+  border-color: #1f2937 !important; /* slate-800 */
+}
+
+/* Nav wrapper */
+.dark nav {
+  background-color: #0b0f19 !important;
+  border-color: #1f2937 !important;
+}
+
+/* Tab active styles */
+.dark .bg-white.text-blue-600 {
+  background-color: #1e293b !important; /* slate-800 */
+  color: #3b82f6 !important; /* active blue */
+  border-color: #334155 !important;
+}
+
+/* Text primary & secondary overrides */
+.dark .text-slate-900,
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #f8fafc !important; /* slate-50 */
+}
+
+.dark .text-slate-800 {
+  color: #e2e8f0 !important; /* slate-200 */
+}
+
+.dark .text-slate-700,
+.dark .text-slate-600 {
+  color: #cbd5e1 !important; /* slate-300 */
+}
+
+.dark .text-slate-500 {
+  color: #94a3b8 !important; /* slate-400 */
+}
+
+.dark .text-slate-400 {
+  color: #64748b !important; /* slate-500 */
+}
+
+/* Anchors */
+.dark .text-slate-700.hover\:text-blue-600 {
+  color: #94a3b8 !important;
+}
+.dark .text-slate-700.hover\:text-blue-600:hover {
+  color: #60a5fa !important;
+}
+
+/* Button overrides where they are light-based */
+.dark .bg-slate-200 {
+  background-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+.dark label[class*="bg-white"] {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border-color: #334155 !important;
+}
+
+.dark label[class*="bg-white"]:hover {
+  background-color: #334155 !important;
+}
+
+/* Modal boxes/dialogs overlay backgrounds */
+.dark .bg-slate-900\/80 {
+  background-color: rgba(2, 6, 23, 0.85) !important;
+}

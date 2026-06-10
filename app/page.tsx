@@ -32,7 +32,9 @@ import {
   Info,
   HelpCircle,
   AlertCircle,
-  Download
+  Download,
+  Sun,
+  Moon
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { KycComparisonSplitView } from "@/components/KycComparisonSplitView";
@@ -164,6 +166,47 @@ const KYC_SAMPLES = [
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"icao" | "kyc" | "explorer" | "audit">("icao");
+
+  // Dynamic Theme state
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    let isDark = false;
+    if (saved === "dark") {
+      isDark = true;
+    } else if (saved === "light") {
+      isDark = false;
+    } else {
+      isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    
+    // Defer state update out of synchronous React render batch to comply with linter rules
+    const timer = setTimeout(() => {
+      setDarkMode(isDark);
+      setMounted(true);
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode, mounted]);
+
+  const toggleDarkMode = () => {
+    const nextDark = !darkMode;
+    setDarkMode(nextDark);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", nextDark ? "dark" : "light");
+    }
+  };
 
   // Tab 1: ICAO compliance States
   const [icaoPhoto, setIcaoPhoto] = useState<string | null>(null);
@@ -440,29 +483,41 @@ export default function Home() {
   };
 
   return (
-    <div id="compliance-main-root" className="min-h-screen bg-slate-50 text-slate-800 antialiased font-sans flex flex-col">
+    <div id="compliance-main-root" className={cn("min-h-screen antialiased font-sans flex flex-col transition-colors duration-200", (mounted && darkMode) ? "dark bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-800")}>
       {/* Top Header */}
       <header id="app-header" className="border-b border-slate-200 bg-white sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div className="flex items-center space-x-3">
-            <div className="bg-blue-600 text-white p-2.5 rounded-xl shadow-sm">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-[10px] uppercase font-bold tracking-widest bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">
-                  ICAO Doc 9303 SECURE
-                </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
-                  KYC Verified
-                </span>
+          <div className="flex items-center justify-between w-full md:w-auto">
+            <div className="flex items-center space-x-3">
+              <div className="bg-blue-600 text-white p-2.5 rounded-xl shadow-sm">
+                <ShieldCheck className="w-6 h-6" />
               </div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 mt-0.5">UAE Residency & Emirates ID Photo Check</h1>
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-[10px] uppercase font-bold tracking-widest bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200">
+                    ICAO Doc 9303 SECURE
+                  </span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-200">
+                    KYC Verified
+                  </span>
+                </div>
+                <h1 className="text-xl font-bold tracking-tight text-slate-900 mt-0.5">UAE Residency & Emirates ID Photo Check</h1>
+              </div>
             </div>
+            
+            {/* Mobile/Tablet Theme Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="md:hidden p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition duration-150 cursor-pointer flex items-center justify-center shadow-3xs"
+              aria-label="Toggle dark mode"
+              title="Toggle theme"
+            >
+              {(mounted && darkMode) ? <Sun className="w-5 h-5 text-amber-500" /> : <Moon className="w-5 h-5 text-indigo-600" />}
+            </button>
           </div>
 
           {/* Navigation Controls (Desktop) */}
-          <div className="hidden md:flex w-full md:w-auto overflow-x-auto no-scrollbar mask-fade-right md:mask-none pb-2 md:pb-0 -mb-2 md:mb-0">
+          <div className="hidden md:flex items-center space-x-3 w-full md:w-auto overflow-x-auto no-scrollbar mask-fade-right md:mask-none pb-2 md:pb-0 -mb-2 md:mb-0">
             <nav className="flex items-center w-max bg-slate-100 p-1 rounded-xl border border-slate-200">
               <button
                 onClick={() => setActiveTab("icao")}
@@ -508,6 +563,20 @@ export default function Home() {
                 </span>
               </button>
             </nav>
+
+            {/* Desktop Theme Toggle Button */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 transition duration-150 cursor-pointer flex items-center justify-center shadow-3xs"
+              aria-label="Toggle dark mode"
+              title={(mounted && darkMode) ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            >
+              {(mounted && darkMode) ? (
+                <Sun className="w-4.5 h-4.5 text-amber-500" />
+              ) : (
+                <Moon className="w-4.5 h-4.5 text-indigo-600" />
+              )}
+            </button>
           </div>
         </div>
       </header>
